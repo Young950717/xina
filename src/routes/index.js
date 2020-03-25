@@ -6,8 +6,13 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+router.get('/profile/:userName/:pageIndex', async (ctx,next)=>{
+  const { userName,pageIndex } = ctx.params
+  ctx.body = {
+    title:'this is profilepage',
+    userName,
+    pageIndex
+  }
 })
 
 router.get('/json', async (ctx, next) => {
