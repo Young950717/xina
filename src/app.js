@@ -8,9 +8,10 @@ const logger = require('koa-logger')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const session = require('koa-generic-session') //session
-const redisStore = require('koa-redis') //koa操作redis
-const { REDIS_CONF } = require('./')
+
+const session = require('koa-generic-session') // session
+const redisStore = require('koa-redis') // koa操作redis
+const { REDIS_CONF } = require('./config/db')
 // error handler
 onerror(app)
 
@@ -30,15 +31,16 @@ app.use(views(__dirname + '/views', {
 // session配置
 app.keys = ['G$IHoj9_kd&']
 app.use(session({
-  key:'weibo.sid', //cookie name的前缀
-  prefix:'weibo:sess:', //redis key的前缀
-  cookie:{
-    path:'/', //存在的路径
-    httpOnly:true, //只能客户端改
-    maxAge:24 * 60 * 60 * 1000 //失效时间(ms)
+  key: 'weibo.sid', // cookie name的前缀
+  prefix: 'weibo:sess:', // redis key的前缀
+  cookie: {
+    path: '/', // 存在的路径
+    httpOnly: true, // 只能服务端改
+    maxAge: 24 * 60 * 60 * 1000 // cookie失效时间(ms)
   },
-  store:redisStore({
-    // all:
+  // ttl: 24 * 60 * 60 * 1000, // redis失效时间(ms) 默认和cookie一致
+  store: redisStore({
+    all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
   })
 }))
 
