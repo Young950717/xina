@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+const jwtKoa = require('koa-jwt')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const errorViewRouter = require('./routes/view/error')
@@ -13,7 +14,7 @@ const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
-
+const { SECRET } = require('../conf/constants')
 let errorConfig = {}
 if (isProd) {
     errorConfig = {
@@ -23,6 +24,14 @@ if (isProd) {
 
 // error handler
 onerror(app, errorConfig)
+
+app.use(jwtKoa({
+    secret: SECRET
+}).unless({
+    path: [/^\/users\/login/] // 自定义那些年目录忽略jwt验证
+})
+)
+
 
 // middlewares
 app.use(bodyparser({

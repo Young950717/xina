@@ -7,5 +7,12 @@
   <body>
     <h1><%= title %></h1>
     <p>EJS Welcome to <%= title %></p>
+    <form action="/users/login" method="post">
+      <div>登录窗口</div>
+    <span>userName:</span> <input type="text" name="userName"><br>
+    <span>password:</span> <input type="password" name="password"><br>
+    <button type="submit">登录</button>
+    <button type="reset">重置</button>
+    </form>
   </body>
 </html>
