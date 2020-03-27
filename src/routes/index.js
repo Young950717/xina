@@ -5,7 +5,6 @@ router.get('/', async (ctx, next) => {
         title: 'Hello Koa 2!'
     })
 })
-
 router.get('/profile/:userName/:pageIndex', async (ctx,next)=>{
     const { userName,pageIndex } = ctx.params
     ctx.body = {
