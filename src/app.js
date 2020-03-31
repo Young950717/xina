@@ -25,12 +25,12 @@ if (isProd) {
 // error handler
 onerror(app, errorConfig)
 
-app.use(jwtKoa({
-    secret: SECRET
-}).unless({
-    path: [/^\/users\/login/] // 自定义那些年目录忽略jwt验证
-})
-)
+// app.use(jwtKoa({
+//     secret: SECRET
+// }).unless({
+//     path: [/^\/users\/login/] // 自定义那些年目录忽略jwt验证
+// })
+// )
 
 
 // middlewares
@@ -47,7 +47,7 @@ app.use(views(__dirname + '/views', {
 
 
 // session配置
-app.keys = ['G$IHoj9_kd&']
+app.keys = ['G$IHkoj9_kd&']
 app.use(session({
     key: 'weibo.sid', // cookie name的前缀
     prefix: 'weibo:sess:', // redis key的前缀
