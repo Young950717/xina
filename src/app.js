@@ -8,13 +8,17 @@ const logger = require('koa-logger')
 
 const jwtKoa = require('koa-jwt')
 const index = require('./routes/index')
-const users = require('./routes/users')
-const errorViewRouter = require('./routes/view/error')
+
 const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
 const { SECRET } = require('../conf/constants')
+
+const userAPIRouter = require('./routes/api/user')
+const userViewRouter = require('./routes/view/user')
+const errorViewRouter = require('./routes/view/error')
+
 let errorConfig = {}
 if (isProd) {
     errorConfig = {
@@ -25,12 +29,12 @@ if (isProd) {
 // error handler
 onerror(app, errorConfig)
 
-app.use(jwtKoa({
-    secret: SECRET
-}).unless({
-    path: [/^\/users\/login/] // 自定义那些年目录忽略jwt验证
-})
-)
+// app.use(jwtKoa({
+//     secret: SECRET
+// }).unless({
+//     path: [/^\/users\/login/] // 自定义那些年目录忽略jwt验证
+// })
+// )
 
 
 // middlewares
@@ -72,8 +76,10 @@ app.use(session({
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
+app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //放在最后
+
 
 // error-handling
 app.on('error', (err, ctx) => {
