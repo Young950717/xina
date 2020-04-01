@@ -14,7 +14,7 @@ const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
 const { SECRET } = require('../conf/constants')
-
+const { SESSION_KEY } = require('./config/secret')
 const userAPIRouter = require('./routes/api/user')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
@@ -51,7 +51,7 @@ app.use(views(__dirname + '/views', {
 
 
 // session配置
-app.keys = ['G$IHoj9_kd&']
+app.keys = [SESSION_KEY]
 app.use(session({
     key: 'weibo.sid', // cookie name的前缀
     prefix: 'weibo:sess:', // redis key的前缀
