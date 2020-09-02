@@ -9,11 +9,13 @@ const { MYSQL_CONF } = require('../config/db')
 const { host, user, password, database } = MYSQL_CONF
 const { isProd, isTest } = require('../utils/env')
 
-
-if (isTest) {
-    config.logging = () => {}
+const config = {
+    host,
+    dialect: 'mysql'
 }
-
+if (isTest) {
+    config.logging = () => { }
+}
 
 // 线上环境使用连接池
 if (isProd) {
@@ -23,10 +25,7 @@ if (isProd) {
         idle: 10000 // 最长无响应时间(ms)
     }
 }
-const config = {
-    host,
-    dialect: 'mysql'
-}
+
 const seq = new Sequelize(database, user, password, config)
 
 // 测试连接

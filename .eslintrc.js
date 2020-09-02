@@ -1,5 +1,5 @@
 module.exports = {
-    "parser":"babel-eslint",
+    "parser": "babel-eslint",
     "env": {
         "commonjs": true,
         "es6": true,
@@ -7,14 +7,14 @@ module.exports = {
     },
     "rules": {
         "indent": ["error", 4],
-        "quotes":[
+        "quotes": [
             "error",
             "single",
             {
-                "allowTemplateLiterals":true
+                "allowTemplateLiterals": true
             }
         ],
-        "semi":[
+        "semi": [
             "error",
             "never"
         ]

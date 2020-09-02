@@ -5,7 +5,7 @@
 
 
 const seq = require('./seq')
-require('./model/index')
+// require('./model/index')
 
 
 // 测试连接
@@ -14,8 +14,8 @@ seq.authenticate().then(() => {
 }).catch(() => {
     console.log('error')
 })
-seq.sync({ force: true }).then(()=>{
+seq.sync({ force: true }).then(() => {
     console.log('sync ok')
     process.exit()
-  
+
 })

@@ -15,7 +15,7 @@ redisClient.on('error', err => {
  * redis get方法
  * @param {string} key 键
  * @param {string} val 值
- * @param {number} timeout 过期时间(ms)
+ * @param {number} timeout 过期时间(s)
  */
 let set = (key, val, timeout = 60 * 60) => {
     val = typeof val === 'object' ? JSON.stringify(val) : val
@@ -24,7 +24,7 @@ let set = (key, val, timeout = 60 * 60) => {
 }
 
 /**
- * redis set方法
+ * redis get方法
  * @param {string} key 
  */
 let get = key => {
@@ -32,11 +32,9 @@ let get = key => {
         redisClient.get(key, (err, val) => {
             if (err) {
                 reject(err)
-                return
             }
             if (val === null) {
                 reslove(null)
-                return
             }
             try {
                 reslove(JSON.parse(val))
@@ -48,5 +46,6 @@ let get = key => {
 }
 
 module.exports = {
-    set
+    set,
+    get
 }

@@ -3,7 +3,7 @@
  * @author Young
  */
 
-function sum(a, b) {
+function sum (a, b) {
   return a + b
 }
 test('10+20=30', () => {
