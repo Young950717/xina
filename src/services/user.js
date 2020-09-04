@@ -18,34 +18,16 @@ async function getUserInfo (userName, password) {
     if (password) {
         Object.assign(whereOpt, { password })
     }
-    const result = await User.findOne({
-        attributes: ['id', 'userName', 'password', 'picture', 'city'],
+    // 查询
+    const res = await User.findOne({
+        attributes: ['id', 'userName', 'nickName', 'picture', 'city'],
         where: whereOpt
     })
-    if (result === null) {
-        return result
-    }
-    // 格式化
-    return formatUser(result.dataValues)
-}
-
-/**
- * 创建用户
- * @param {string} userName 
- * @param {string} password 
- * @param {number} gender 
- * @param {string} nickName 
- */
-async function createUser ({ userName, password, gender = 3, nickName }) {
-    const user = await User.create({
-        userName,
-        password,
-        gender,
-        nickName: nickName ? nickName : `${userName}${Math.random().toString(36).slice(-5)}`
-    })
-    return user.dataValues
+    // 没有找到
+    if (!res) return res
+    // 格式化处理 ---
+    return formatUser(res.dataValues)
 }
 module.exports = {
-    getUserInfo,
-    createUser
+    getUserInfo
 }

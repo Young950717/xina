@@ -5,13 +5,14 @@
 
 const seq = require('../seq')
 const { STRING, DECIMAL } = require('../types')
-//  users表
+
+// users
 const User = seq.define('user', {
     userName: {
         type: STRING,
         allowNull: false,
-        unique: true, //唯一性
-        comment: '用户名 唯一'
+        unique: true, // 唯一
+        comment: '用户名'
     },
     password: {
         type: STRING,
@@ -26,16 +27,16 @@ const User = seq.define('user', {
     gender: {
         type: DECIMAL,
         allowNull: false,
-        defaultValue: 3,
-        comment: '性别 （1男 2女 3保密）'
+        comment: '性别1男 2女 3保密',
+        defalutValue: '3'
     },
     picture: {
         type: STRING,
-        comment: '头像地址'
+        comment: '头像 图片地址'
     },
     city: {
         type: STRING,
         comment: '城市'
     }
 })
-module.exports = User
+module.exports = User 

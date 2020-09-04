@@ -27,7 +27,6 @@ router.get('/json', async (ctx, next) => {
 })
 router.post('/login', async (ctx, next) => {
     const { userName, password } = ctx.request.body
-    console.log(ctx.request);
     let userInfo
     if (userName === 'abc' && password === '123') {
         userInfo = {

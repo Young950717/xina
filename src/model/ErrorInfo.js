@@ -1,5 +1,5 @@
 /**
- * @description 失败信息集合，包括 errNum 和 message
+ * @description 失败信息集合，包括 errNum 和 msg
  * @author Young
  */
 
@@ -7,71 +7,71 @@ module.exports = {
     // 用户名已存在
     registerUserNameExistInfo: {
         errNum: 10001,
-        message: '用户名已存在'
+        msg: '用户名已存在'
     },
     // 注册失败
     registerFailInfo: {
         errNum: 10002,
-        message: '注册失败，请重试'
+        msg: '注册失败，请重试'
     },
     // 用户名不存在
     registerUserNameNotExistInfo: {
         errNum: 10003,
-        message: '用户名未存在'
+        msg: '用户名未存在'
     },
     // 登录失败
     loginFailInfo: {
         errNum: 10004,
-        message: '登录失败，用户名或密码错误'
+        msg: '登录失败，用户名或密码错误'
     },
     // 未登录
     loginCheckFailInfo: {
         errNum: 10005,
-        message: '您尚未登录'
+        msg: '您尚未登录'
     },
     // 修改密码失败
     changePasswordFailInfo: {
         errNum: 10006,
-        message: '修改密码失败，请重试'
+        msg: '修改密码失败，请重试'
     },
     // 上传文件过大
     uploadFileSizeFailInfo: {
         errNum: 10007,
-        message: '上传文件尺寸过大'
+        msg: '上传文件尺寸过大'
     },
     // 修改基本信息失败
     changeInfoFailInfo: {
         errNum: 10008,
-        message: '修改基本信息失败'
+        msg: '修改基本信息失败'
     },
     // json schema 校验失败
     jsonSchemaFileInfo: {
         errNum: 10009,
-        message: '数据格式校验错误'
+        msg: '数据格式校验错误'
     },
     // 删除用户失败
     deleteUserFailInfo: {
         errNum: 10010,
-        message: '删除用户失败'
+        msg: '删除用户失败'
     },
     // 添加关注失败
     addFollowerFailInfo: {
         errNum: 10011,
-        message: '添加关注失败'
+        msg: '添加关注失败'
     },
     // 取消关注失败
     deleteFollowerFailInfo: {
         errNum: 10012,
-        message: '取消关注失败'
+        msg: '取消关注失败'
     },
     // 创建微博失败
     createBlogFailInfo: {
         errNum: 11001,
-        message: '创建微博失败，请重试'
+        msg: '创建微博失败，请重试'
     },
     // 删除微博失败
     deleteBlogFailInfo: {
         errNum: 11002,
-        message: '删除微博失败，请重试'
+        msg: '删除微博失败，请重试'
     }
 }
