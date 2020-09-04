@@ -28,6 +28,23 @@ async function getUserInfo (userName, password) {
     // 格式化处理 ---
     return formatUser(res.dataValues)
 }
+/**
+ * 
+ * @param {string} userName 
+ * @param {string} password 
+ * @param {number} gender 
+ * @param {string} nickName 
+ */
+async function createUser ({ userName, password, gender = 3, nickName }) {
+    const res = User.create({
+        userName,
+        password,
+        gender,
+        nickName: nickName ? nickName : `${userName}-${Math.random().toString(36).slice(-4)}`
+    })
+    return res.dataValues
+}
 module.exports = {
-    getUserInfo
+    getUserInfo,
+    createUser
 }
