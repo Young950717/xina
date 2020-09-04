@@ -4,7 +4,7 @@
  */
 const { DEFALUT_AVATAR_URL } = require('../config/constants')
 
-function _formatUserPic(user) {
+function _formatUserPic (user) {
     user.picture = user.picture === '' || null ? DEFALUT_AVATAR_URL : user.picture
     return user
 }
@@ -13,7 +13,7 @@ function _formatUserPic(user) {
  * 格式化用户信息
  * @param {Array|Object} list 用户列表或者一个用户对象
  */
-function formatUser(list) {
+function formatUser (list) {
 
     if (list === null) return list
 

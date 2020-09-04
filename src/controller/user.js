@@ -11,7 +11,7 @@ const { doCrypto } = require('../utils/cryp')
  * 用户名是否存在
  * @param {string} userName 
  */
-async function isExist(userName) {
+async function isExist (userName) {
     // 调用services获取数据
     const userInfo = await getUserInfo(userName)
     // 统一返回格式
@@ -33,7 +33,7 @@ async function isExist(userName) {
  * @param {string} password 
  * @param {number} gender 
  */
-async function register({ userName, password, gender }) {
+async function register ({ userName, password, gender }) {
     const userInfo = await getUserInfo(userName)
     if (userInfo) {
         // 存在

@@ -6,14 +6,14 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const jwtKoa = require('koa-jwt')
+// const jwtKoa = require('koa-jwt')
 const index = require('./routes/index')
 
 const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
-const { SECRET } = require('../conf/constants')
+// const { SECRET } = require('../conf/constants')
 const { SESSION_KEY } = require('./config/secret')
 const userAPIRouter = require('./routes/api/user')
 const userViewRouter = require('./routes/view/user')

@@ -10,7 +10,7 @@ const { formatUser } = require('./_format')
  * @param {string} userName 
  * @param {string} password 
  */
-async function getUserInfo(userName, password) {
+async function getUserInfo (userName, password) {
     // 查询条件
     const whereOpt = {
         userName
@@ -36,12 +36,12 @@ async function getUserInfo(userName, password) {
  * @param {number} gender 
  * @param {string} nickName 
  */
-async function createUser({userName,password,gender=3,nickName}){
+async function createUser ({ userName, password, gender = 3, nickName }) {
     const user = await User.create({
         userName,
         password,
         gender,
-        nickName:nickName?nickName:`${userName}${Math.random().toString(36).slice(-5)}`
+        nickName: nickName ? nickName : `${userName}${Math.random().toString(36).slice(-5)}`
     })
     return user.dataValues
 }
