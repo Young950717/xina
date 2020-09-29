@@ -10,7 +10,7 @@ const { jsonSchemaFileInfo } = require('../model/ErrorInfo')
  */
 function genValidator (validateFn) {
     // 定义中间件
-    function validator (ctx, next) {
+    async function validator (ctx, next) {
         const data = ctx.request.body
         // 校验
         const error = validateFn(data)
@@ -18,7 +18,7 @@ function genValidator (validateFn) {
             ctx.body = new ErrorModel(jsonSchemaFileInfo)
             return false
         }
-        next() //验证成功
+        await next() //验证成功
 
     }
     // 返回中间件

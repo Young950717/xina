@@ -50,7 +50,7 @@ async function createUser ({ userName, password, gender = 3, nickName }) {
  * @param {String} userName 用户名
  */
 async function deleteUser (userName) {
-    const res = User.destroy({
+    const res = await User.destroy({
         where: {
             userName
         }
