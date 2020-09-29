@@ -6,15 +6,19 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const jwtKoa = require('koa-jwt')
+// const jwtKoa = require('koa-jwt')
 const index = require('./routes/index')
-const users = require('./routes/users')
-const errorViewRouter = require('./routes/view/error')
+
 const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
-const { SECRET } = require('../conf/constants')
+// const { SECRET } = require('../conf/constants')
+const { SESSION_KEY } = require('./config/secret')
+const userAPIRouter = require('./routes/api/user')
+const userViewRouter = require('./routes/view/user')
+const errorViewRouter = require('./routes/view/error')
+
 let errorConfig = {}
 if (isProd) {
     errorConfig = {
@@ -47,7 +51,7 @@ app.use(views(__dirname + '/views', {
 
 
 // session配置
-app.keys = ['G$IHkoj9_kd&']
+app.keys = [SESSION_KEY]
 app.use(session({
     key: 'weibo.sid', // cookie name的前缀
     prefix: 'weibo:sess:', // redis key的前缀
@@ -72,8 +76,10 @@ app.use(session({
 
 // routes
 app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
-app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
+app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //放在最后
+
 
 // error-handling
 app.on('error', (err, ctx) => {
