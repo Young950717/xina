@@ -5,7 +5,7 @@
 const { DEFALUT_AVATAR_URL } = require('../config/constants')
 
 function _formatUserPic (user) {
-    user.picture = user.picture === '' || null ? DEFALUT_AVATAR_URL : user.picture
+    user.picture = !user.picture ? DEFALUT_AVATAR_URL : user.picture
     return user
 }
 
@@ -20,9 +20,8 @@ function formatUser (list) {
     if (list instanceof Array) {
         return list.map(_formatUserPic)
     }
-    if (list instanceof Object) {
-        return _formatUserPic(list)
-    }
+    return _formatUserPic(list)
+
 }
 module.exports = {
     formatUser
