@@ -3,13 +3,14 @@
  * @author Young
  */
 
-const { getUserInfo, createUser } = require('../services/user')
+const { getUserInfo, createUser, deleteUser } = require('../services/user')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const {
     registerUserNameNotExistInfo,
     registerUserNameExistInfo,
     registerFailInfo,
-    loginFailInfo
+    loginFailInfo,
+    deleteUserFailInfo
 } = require('../model/ErrorInfo')
 
 const { doCrypto } = require('../utils/cryp')
@@ -56,7 +57,7 @@ async function register ({ userName, password, gender }) {
 }
 
 /**
- * 
+ * 登录
  * @param {Object} ctx koa2 ctx
  * @param {String} userName 用户名
  * @param {String} password 密码
@@ -77,8 +78,22 @@ async function login (ctx, userName, password) {
 
 }
 
+/**
+ * 根据用户名删除用户信息
+ * @param {String} userName 用户名
+ */
+async function deleteCurUser (userName) {
+    // service
+    const res = await deleteUser(userName)
+    if (res) {
+        return new SuccessModel()
+    }
+    return new ErrorModel(deleteUserFailInfo)
+
+}
 module.exports = {
     isExist,
     register,
-    login
+    login,
+    deleteCurUser
 }
