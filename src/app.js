@@ -7,7 +7,6 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaStatic = require('koa-static')
 // const jwtKoa = require('koa-jwt')
-const index = require('./routes/index')
 const path = require('path')
 const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
@@ -18,6 +17,7 @@ const { SESSION_KEY } = require('./config/secret')
 const userAPIRouter = require('./routes/api/user')
 const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
+const blogViewRouter = require('./routes/view/blog')
 const errorViewRouter = require('./routes/view/error')
 
 let errorConfig = {}
@@ -77,7 +77,7 @@ app.use(session({
 // })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
+app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())

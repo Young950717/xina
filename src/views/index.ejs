@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
+<%- include('layout/header', { title: '微博 - 首页', isNav: true, list: true, isInputBlog: true })%>
 
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
+<div class="container margin-top-20">
+  <div class="row">
+    <!-- 左侧 -->
+    <div class="col-8">
+      <!-- 输入框 -->
+      <%- include('widgets/input')%>
+    </div> <!-- 左侧结束 -->
 
-<body>
-  <h1><%= title %></h1>
-  <p>EJS Welcome to <%= title %></p>
-  <form action="/users/login" method="post">
-    <div>登录窗口</div>
-    <span>userName:</span> <input type="text" name="userName"><br>
-    <span>password:</span> <input type="password" name="password"><br>
-    <button type="submit">登录</button>
-    <button type="reset">重置</button>
-  </form>
-</body>
+    <!-- 右侧 -->
+    <div class="col-4">
+      右侧
+    </div>
+  </div>
 
-</html>
+  <%- include('layout/footer')%>
