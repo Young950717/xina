@@ -30,7 +30,6 @@ router.get('/register', async (ctx, next) => {
     await ctx.render('register', getLoginUserInfo(ctx))
 })
 router.get('/setting', loginRedirect, async (ctx, next) => {
-    console.log(ctx.session.userInfo)
     await ctx.render('setting', ctx.session.userInfo)
 })
 

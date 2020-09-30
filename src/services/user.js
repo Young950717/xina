@@ -58,8 +58,47 @@ async function deleteUser (userName) {
     return res > 0 // 删除行数
 }
 
+/**
+ * 修改用户信息
+ * @param {Object} obj 需要替换的数据 
+ * @param {Object} obj 查询条件 
+ */
+async function updateUser (
+    {
+        newNickName,
+        newCity,
+        newPicture,
+        newPassword
+    }, {
+        userName,
+        password
+    }) {
+    // 拼接内容
+    const updateData = {}
+    newPassword && (updateData.password = newPassword)
+    newNickName && (updateData.nickName = newNickName)
+    newCity && (updateData.city = newCity)
+    newPicture && (updateData.picture = newPicture)
+
+    // 查询条件
+    const whereData = {
+        userName
+    }
+    password && (whereData.password = password)
+
+    // console.log(updateData, whereData);
+    // 修改
+    const res = await User.update(updateData, {
+        where: whereData
+    })
+    // console.log(res)
+    return res[0] > 0
+
+}
+
 module.exports = {
     getUserInfo,
     createUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }
