@@ -35,7 +35,7 @@
                     return
                 }
                 // 跳转到指定 url 或首页
-                let href = window.location.href.split('=')[1]
+                let href = window.location.href.split('=')[1] || '/'
                 location.href = href
             })
         })
