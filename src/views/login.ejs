@@ -25,7 +25,6 @@
             e.preventDefault()
             const userName = $inputUserName.val()
             const password = $inputPassword.val()
-
             // 提交数据
             ajax.post('/api/user/login', {
                 userName,
@@ -36,9 +35,8 @@
                     return
                 }
                 // 跳转到指定 url 或首页
-                // var redirectUrl = $.query.get('url') || '/'
-                var redirectUrl = '/'
-                location.href = redirectUrl
+                let href = window.location.href.split('=')[1]
+                location.href = href
             })
         })
     })

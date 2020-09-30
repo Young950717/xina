@@ -23,7 +23,9 @@ async function loginRedirect (ctx, next) {
         return false
     }
     const curUrl = ctx.url
-    ctx.redirect(`/login?url=${encodeURIComponent(curUrl)}`)
+    ctx.redirect(`/login?url=${curUrl}`)
+    // decodeURIComponent //解密
+    // encodeURIComponent //加密
 
 }
 module.exports = {
