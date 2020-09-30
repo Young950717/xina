@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Sina
 仿造新浪微博的功能 用koa写的小项目
 
@@ -10,10 +9,6 @@ redis-cli
 检测eslint npm run lint
 修复eslint npm run fix
 单元测试 npm run test
-=======
-# ** Sina**
-
-仿造新浪微博的功能 用koa写的小项目
 
 ## ** 功能列表**
 
@@ -46,4 +41,3 @@ redis-cli
 ### 8.@和回复
 
 ### 9.@提到我的
->>>>>>> feature-login

@@ -5,10 +5,10 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-
+const koaStatic = require('koa-static')
 // const jwtKoa = require('koa-jwt')
 const index = require('./routes/index')
-
+const path = require('path')
 const session = require('koa-generic-session') // session
 const redisStore = require('koa-redis') // koa操作redis
 const { REDIS_CONF } = require('./config/db')
@@ -16,6 +16,7 @@ const { isProd } = require('./utils/env')
 // const { SECRET } = require('../conf/constants')
 const { SESSION_KEY } = require('./config/secret')
 const userAPIRouter = require('./routes/api/user')
+const utilsAPIRouter = require('./routes/api/utils')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
 
@@ -43,7 +44,8 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(koaStatic(__dirname + '/public'))
+app.use(koaStatic(path.join(__dirname, '..', 'uploadFiles')))
 
 app.use(views(__dirname + '/views', {
     extension: 'ejs'
@@ -78,6 +80,7 @@ app.use(session({
 app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
+app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //放在最后
 
 
