@@ -14,10 +14,16 @@ const { REDIS_CONF } = require('./config/db')
 const { isProd } = require('./utils/env')
 // const { SECRET } = require('../conf/constants')
 const { SESSION_KEY } = require('./config/secret')
-const userAPIRouter = require('./routes/api/user')
+
+// 工具类api
 const utilsAPIRouter = require('./routes/api/utils')
+// 用户相关
 const userViewRouter = require('./routes/view/user')
+const userAPIRouter = require('./routes/api/user')
+// 微博相关
 const blogViewRouter = require('./routes/view/blog')
+const blogHomeAPIRouter = require('./routes/api/blog-home')
+// 错误页面
 const errorViewRouter = require('./routes/view/error')
 
 let errorConfig = {}
@@ -80,6 +86,7 @@ app.use(session({
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
+app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods())
 app.use(utilsAPIRouter.routes(), utilsAPIRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods()) //放在最后
 
