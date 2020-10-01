@@ -2,7 +2,7 @@
  * @description about微博 controller
  * @author Young
  */
-
+const xss = require('xss')
 const { createBlog } = require('../services/blog')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { createBlogFailInfo } = require('../model/ErrorInfo')
@@ -15,7 +15,7 @@ const { createBlogFailInfo } = require('../model/ErrorInfo')
  */
 async function create (userId, content, image) {
     try {
-        const blog = await createBlog(userId, content, image)
+        const blog = await createBlog(userId, xss(content), image)
         return new SuccessModel(blog)
     } catch (ex) {
         return new ErrorModel(createBlogFailInfo)
