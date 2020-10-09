@@ -9,7 +9,7 @@
 */
 
 
-const COOKIE = 'weibo.sid=q_PWhxMvUgXeLoqWnBBhBSHQBfDvRyYB; weibo.sid.sig=wJdGRHlehRicvVzs4lax8mnKoVM'
+const COOKIE = 'weibo.sid=8g-plGex2b_GBS7IHuFhari2WoWRo5dW; weibo.sid.sig=aejJVAulpl6Zsei8ZRrkcMqGlQQ'
 const USERNAME = 'young'
 module.exports = {
     COOKIE,
