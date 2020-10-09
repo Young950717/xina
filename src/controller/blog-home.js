@@ -18,8 +18,8 @@ async function create (userId, content, image) {
         const blog = await createBlog(userId, xss(content), image)
         return new SuccessModel(blog)
     } catch (ex) {
-        return new ErrorModel(createBlogFailInfo)
         console.error(ex.message, es.stack)
+        return new ErrorModel(createBlogFailInfo)
     }
 
 }
