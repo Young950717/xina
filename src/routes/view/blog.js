@@ -21,10 +21,10 @@ router.get('/profile', loginRedirect, async (ctx, next) => {
 router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     // 已登录的用户信息
     const userInfo = ctx.session.userInfo
-    const userName = userInfo.userName
+    const myUserName = userInfo.userName
     let curUserInfo
     const { userName: curUserName } = ctx.params
-    const isMe = userName === curUserName
+    const isMe = myUserName === curUserName
     if (isMe) {
         curUserInfo = userInfo
     } else {
@@ -42,6 +42,10 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     // 获取粉丝
     const fansRes = await getFans(curUserInfo.id)
     const { count: fansCount, fansList } = fansRes.data
+    // 是否关注了此人
+    const amIFollowed = fansList.some(o => {
+        return o.userName === myUserName
+    })
     await ctx.render('profile', {
         blogData: {
             blogList,
@@ -56,8 +60,9 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
             fansData: {
                 count: fansCount,
                 list: fansList
-            }
-        }
+            },
+            amIFollowed
+        },
     })
 })
 
