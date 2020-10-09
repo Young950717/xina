@@ -7,7 +7,7 @@ const router = require('koa-router')()
 const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { getSquareBlogList } = require('../../controller/blog-square')
-const { getFans } = require('../../controller/user-relation')
+const { getFans, getFollower } = require('../../controller/user-relation')
 
 const { isExist } = require('../../controller/user')
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -39,13 +39,21 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     // 获取第一页微博数据
     const res = await getProfileBlogList(curUserName, 0)
     const { blogList, isEmpty, count, pageIndex, pageSize } = res.data
+
     // 获取粉丝
     const fansRes = await getFans(curUserInfo.id)
     const { count: fansCount, fansList } = fansRes.data
+
+    // 获取关注人列表
+    const followerRes = await getFollower(curUserInfo.id)
+    const { count: followerCount, followerList } = followerRes.data
+
+
     // 是否关注了此人
     const amIFollowed = fansList.some(o => {
         return o.userName === myUserName
     })
+
     await ctx.render('profile', {
         blogData: {
             blogList,
@@ -60,6 +68,10 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
             fansData: {
                 count: fansCount,
                 list: fansList
+            },
+            followersData: {
+                count: followerCount,
+                list: followerList
             },
             amIFollowed
         },
