@@ -23,7 +23,8 @@ const userAPIRouter = require('./routes/api/user')
 // 微博相关
 const blogViewRouter = require('./routes/view/blog')
 const blogHomeAPIRouter = require('./routes/api/blog-home')
-const blogProfileAPIROuter = require('./routes/api/blog-profile')
+const blogProfileAPIRouter = require('./routes/api/blog-profile')
+const blogSquareAPIRouter = require('./routes/api/blog-square')
 // 错误页面
 const errorViewRouter = require('./routes/view/error')
 
@@ -85,7 +86,8 @@ app.use(session({
 
 // routes
 app.use(blogViewRouter.routes(), blogViewRouter.allowedMethods())
-app.use(blogProfileAPIROuter.routes(), blogProfileAPIROuter.allowedMethods())
+app.use(blogProfileAPIRouter.routes(), blogProfileAPIRouter.allowedMethods())
+app.use(blogSquareAPIRouter.routes(), blogSquareAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(blogHomeAPIRouter.routes(), blogHomeAPIRouter.allowedMethods())

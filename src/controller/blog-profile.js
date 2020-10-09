@@ -5,8 +5,7 @@
 
 
 const { getBlogListByUser } = require('../services/blog')
-const { SuccessModel, ErrorModel } = require('../model/ResModel')
-// const { } = require('../model/ErrorInfo')
+const { SuccessModel } = require('../model/ResModel')
 const { PAGE_SIZE } = require('../config/constants')
 /**
  * 获取个人主页微博列表
