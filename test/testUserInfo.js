@@ -12,8 +12,8 @@
 module.exports = {
     Y_COOKIE: 'weibo.sid=i6ZKypE9Xr_CNodEN6rvDDgaClMj1jhB; weibo.sid.sig=HE86O_Lfe9fgUlHNTNoCS3UgKkU',
     Y_USERNAME: 'young',
-    Y_ID: 1,
-    A_COOKIE: 'weibo.sid=Y3u2m7Yarra15tsRu0c1XEVSYNi_H6xq; weibo.sid.sig=pAb-UiyH3zpid-rVSsWTBZuiS8E',
+    Y_ID: 2,
+    A_COOKIE: 'weibo.sid=rigo81ZFSMqgnubmjQgxVQle5fwhA4Jj; weibo.sid.sig=_ppZD2bdoRv4WC_YYX6vn8HXCsg',
     A_USERNAME: 'admin',
-    A_ID: 2
+    A_ID: 3
 }

@@ -32,7 +32,7 @@ test('Young关注admin 应该成功', async () => {
 test('获取admin的粉丝 应该有Young', async () => {
     const res = await getFans(A_ID)
     const { count, fansList } = res.data
-
+    console.log('fansList================', fansList);
     const hasFans = fansList.some(o => {
         return o.userName === Y_USERNAME
     })

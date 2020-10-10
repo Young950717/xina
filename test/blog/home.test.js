@@ -23,3 +23,17 @@ test('创建一个微博应该成功', async () => {
     expect(res.body.data.image).toBe(image)
     BLOG_ID = res.body.data.id
 })
+
+
+test('加载微博首页第一页微博 应该成功', async () => {
+    const res = await server
+        .get(`/api/blog/loadMore/0`)
+        .set('cookie', Y_COOKIE)
+    expect(res.body.errNum).toBe(0)
+    const data = res.body.data
+    expect(data).toHaveProperty('isEmpty')
+    expect(data).toHaveProperty('blogList')
+    expect(data).toHaveProperty('pageSize')
+    expect(data).toHaveProperty('pageIndex')
+    expect(data).toHaveProperty('count')
+})
