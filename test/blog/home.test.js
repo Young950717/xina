@@ -5,7 +5,7 @@
 
 
 const server = require('../server')
-const { COOKIE } = require('../testUserInfo')
+const { Y_COOKIE } = require('../testUserInfo')
 
 let BLOG_ID = '' // 创建的微博id
 
@@ -17,7 +17,7 @@ test('创建一个微博应该成功', async () => {
             content,
             image
         })
-        .set('cookie', COOKIE)
+        .set('cookie', Y_COOKIE)
     expect(res.body.errNum).toBe(0)
     expect(res.body.data.content).toBe(content)
     expect(res.body.data.image).toBe(image)

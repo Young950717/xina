@@ -9,9 +9,11 @@
 */
 
 
-const COOKIE = 'weibo.sid=8g-plGex2b_GBS7IHuFhari2WoWRo5dW; weibo.sid.sig=aejJVAulpl6Zsei8ZRrkcMqGlQQ'
-const USERNAME = 'young'
 module.exports = {
-    COOKIE,
-    USERNAME
+    Y_COOKIE: 'weibo.sid=i6ZKypE9Xr_CNodEN6rvDDgaClMj1jhB; weibo.sid.sig=HE86O_Lfe9fgUlHNTNoCS3UgKkU',
+    Y_USERNAME: 'young',
+    Y_ID: 1,
+    A_COOKIE: 'weibo.sid=Y3u2m7Yarra15tsRu0c1XEVSYNi_H6xq; weibo.sid.sig=pAb-UiyH3zpid-rVSsWTBZuiS8E',
+    A_USERNAME: 'admin',
+    A_ID: 2
 }
