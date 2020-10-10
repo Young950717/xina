@@ -5,6 +5,9 @@
 
 const { User } = require('../db/model/index')
 const { formatUser } = require('./_format')
+const { addFollower } = require('./user-relation')
+
+
 /**
  * 获取用户信息
  * @param {string} userName 
@@ -25,7 +28,7 @@ async function getUserInfo (userName, password) {
     })
     // 没有找到
     if (!res) return res
-    // 格式化处理 ---
+    // 格式化处理 
     return formatUser(res.dataValues)
 }
 /**
@@ -42,7 +45,10 @@ async function createUser ({ userName, password, gender = 3, nickName }) {
         gender,
         nickName: nickName ? nickName : `${userName}-${Math.random().toString(36).slice(-4)}`
     })
-    return res.dataValues
+    const data = res.dataValues
+    // 创建用户之后 使其自己关注自己（更好的展示首页）
+    addFollower(data.id, data.id)
+    return data
 }
 
 /**
