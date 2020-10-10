@@ -4,7 +4,7 @@
  */
 
 
-const { Blog, User } = require('../db/model/index')
+const { Blog, User, UserRelation } = require('../db/model/index')
 const { formatUser, formatBlog } = require('./_format')
 /**
  * db 创建微博
@@ -44,10 +44,8 @@ async function getBlogListByUser ({ userName, pageIndex = 0, pageSize }) {
             }
         ]
     })
-
     // res.rows  查询结果 数组
     // res.count // 查询总数
-
     let blogList = res.rows.map(row => row.dataValues)
     blogList = formatBlog(blogList)
     blogList = blogList.map(blog => {
@@ -62,7 +60,46 @@ async function getBlogListByUser ({ userName, pageIndex = 0, pageSize }) {
 
 }
 
+/**
+ * 获取关注者的微博列表
+ * @param {Object} param0 查询参数
+ */
+async function getFollowersBlogList ({ userId, pageIndex = 0, pageSize }) {
+    const res = await Blog.findAndCountAll({
+        limit: pageSize,
+        offset: pageIndex * pageSize,
+        order: [
+            ['id', 'desc']
+        ],
+        include: [
+            {
+                model: User,
+                attributes: ['userName', 'nickName', 'picture']
+            },
+            {
+                model: UserRelation,
+                attributes: ['userId', 'followerId'],
+                where: { userId }
+            }
+        ]
+    })
+    let blogList = res.rows.map(row => row.dataValues)
+    blogList = formatBlog(blogList)
+    blogList = blogList.map(blog => {
+        const user = blog.user.dataValues
+        blog.user = formatUser(user)
+        return blog
+    })
+    return {
+        blogList,
+        count: res.count
+    }
+}
+
+
+
 module.exports = {
     createBlog,
-    getBlogListByUser
+    getBlogListByUser,
+    getFollowersBlogList
 }

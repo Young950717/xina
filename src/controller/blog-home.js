@@ -3,10 +3,10 @@
  * @author Young
  */
 const xss = require('xss')
-const { createBlog } = require('../services/blog')
+const { createBlog, getFollowersBlogList } = require('../services/blog')
 const { SuccessModel, ErrorModel } = require('../model/ResModel')
 const { createBlogFailInfo } = require('../model/ErrorInfo')
-
+const { PAGE_SIZE } = require('../config/constants')
 /**
  * 为用户创建微博
  * @param {String} userId 用户id 查询条件 关联外键
@@ -23,6 +23,32 @@ async function create (userId, content, image) {
     }
 
 }
+
+/**
+ * 获取微博首页列表
+ * @param {Number} userId 
+ * @param {Number} pageIndex 
+ */
+async function getHomeBlogList (userId, pageIndex = 0) {
+    const res = await getFollowersBlogList(
+        {
+            userId,
+            pageIndex,
+            pageSize: PAGE_SIZE
+        }
+    )
+    const { count, blogList } = res
+    return new SuccessModel({
+        blogList,
+        isEmpty: blogList.length === 0,
+        count,
+        pageIndex,
+        pageSize: PAGE_SIZE
+    })
+}
+
+
 module.exports = {
-    create
+    create,
+    getHomeBlogList
 }
