@@ -17,6 +17,7 @@ const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middlewares/validate')
 const { isTest } = require('../../utils/env')
 const { loginCheck } = require('../../middlewares/loginChecks')
+const { getFollower } = require('../../controller/user-relation')
 
 // 注册
 router.post('/register', genValidator(userValidate), async (ctx, next) => {
@@ -64,6 +65,17 @@ router.patch('/changePassword', loginCheck, genValidator(userValidate), async (c
 // 退出登录
 router.post('/logout', loginCheck, async (ctx, next) => {
     ctx.body = await logout(ctx)
+})
+
+// 获取@/关注人列表
+router.get('/getAtList', loginCheck, async (ctx, next) => {
+    const { id: userId } = ctx.session.userInfo
+    const res = await getFollower(userId)
+    const { followerList } = res.data
+    let list = followerList.map(user => {
+        return `${user.nickName} - ${user.userName}`
+    })
+    ctx.body = list
 })
 
 

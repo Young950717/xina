@@ -44,6 +44,10 @@ module.exports = {
         errNum: 10008,
         msg: '修改基本信息失败'
     },
+    exitNickNameInfo: {
+        errNum: 10013,
+        msg: '昵称重复 请重新想一个'
+    },
     // json schema 校验失败
     jsonSchemaFileInfo: {
         errNum: 10009,

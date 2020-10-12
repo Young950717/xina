@@ -22,6 +22,7 @@ const User = seq.define('user', {
     nickName: {
         type: STRING,
         allowNull: false,
+        unique: true,
         comment: '昵称'
     },
     gender: {
