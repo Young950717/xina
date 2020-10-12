@@ -113,9 +113,9 @@ async function changeUserInfo (ctx, { nickName, city, picture }) {
         {
             userName
         })
-    if (res === '重复昵称') {
-        return new ErrorModel(exitNickNameInfo)
-    }
+    // if (res === '重复昵称') {
+    //     return new ErrorModel(exitNickNameInfo)
+    // }
     if (!res) {
         return new ErrorModel(changeInfoFailInfo)
     }

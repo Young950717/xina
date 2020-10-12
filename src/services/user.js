@@ -80,15 +80,15 @@ async function updateUser (
         password
     }) {
     // 排除重复的nickName
-    const nickNameRes = await User.findOne({
-        attributes: ['id'],
-        where: {
-            nickName: newNickName
-        }
-    })
-    if (nickNameRes) {
-        return '重复昵称'
-    }
+    // const nickNameRes = await User.findOne({
+    //     attributes: ['id'],
+    //     where: {
+    //         nickName: newNickName
+    //     }
+    // })
+    // if (nickNameRes) {
+    //     return '重复昵称'
+    // }
     // 拼接内容
     const updateData = {}
     newPassword && (updateData.password = newPassword)

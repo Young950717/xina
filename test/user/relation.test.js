@@ -28,6 +28,20 @@ test('Young关注admin 应该成功', async () => {
         .set('cookie', Y_COOKIE)
     expect(res.body.errNum).toBe(0)
 })
+
+// 或者Young的@列表
+test('Young的@列表里面有admin', async () => {
+    const res = await server
+        .get('/api/user/getAtList')
+        .set('cookie', Y_COOKIE)
+    const atList = res.body
+    let hasName = atList.some(user => {
+        return user.includes(A_USERNAME)
+    })
+    expect(hasName).toBe(true)
+})
+
+
 // 获取粉丝
 test('获取admin的粉丝 应该有Young', async () => {
     const res = await getFans(A_ID)

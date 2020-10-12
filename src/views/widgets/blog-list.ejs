@@ -16,10 +16,10 @@
         <span><%= blog.createdAtFormat%></span>
         &nbsp;
         <% if (locals.canReply) { %>
-        <%# 可以回复 %>
+        <%# 可以评论 %>
         <a href="#" class="blog-list-reply" data-content="<%= blog.content%>" data-userName="<%= blog.user.userName%>"
             data-nickName="<%= blog.user.nickName%>">
-            <i class="fa fa-mail-reply"></i> 回复
+            <i class="fa fa-mail-reply"></i> 评论
         </a>
         <% } %>
     </div>

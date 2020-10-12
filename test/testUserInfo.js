@@ -10,10 +10,10 @@
 
 
 module.exports = {
-    Y_COOKIE: 'weibo.sid=i6ZKypE9Xr_CNodEN6rvDDgaClMj1jhB; weibo.sid.sig=HE86O_Lfe9fgUlHNTNoCS3UgKkU',
+    Y_COOKIE: 'weibo.sid=N-0U_TbKFfncDvckJ59UiHc5p-DOEMFO; weibo.sid.sig=t35vW7iUIATeHYDPgFYZp3L534w',
     Y_USERNAME: 'young',
-    Y_ID: 2,
-    A_COOKIE: 'weibo.sid=rigo81ZFSMqgnubmjQgxVQle5fwhA4Jj; weibo.sid.sig=_ppZD2bdoRv4WC_YYX6vn8HXCsg',
+    Y_ID: 1,
+    A_COOKIE: 'weibo.sid=-FDJ3TW7sH4lNUNj9Zx4uOG0LV94aLup; weibo.sid.sig=hDp6UKlcVdsYhG2h4yGVOg3sVQw',
     A_USERNAME: 'admin',
-    A_ID: 3
+    A_ID: 2
 }
