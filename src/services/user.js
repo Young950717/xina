@@ -102,7 +102,7 @@ async function updateUser (
     }
     password && (whereData.password = password)
 
-    // console.log(updateData, whereData);
+    console.log('updateData', updateData)
     // 修改
     const res = await User.update(updateData, {
         where: whereData

@@ -12,6 +12,7 @@ function genValidator (validateFn) {
     // 定义中间件
     async function validator (ctx, next) {
         const data = ctx.request.body
+        console.log(data)
         // 校验
         const error = validateFn(data)
         if (error) {
