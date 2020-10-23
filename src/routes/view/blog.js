@@ -8,7 +8,7 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { getSquareBlogList } = require('../../controller/blog-square')
 const { getFans, getFollower } = require('../../controller/user-relation')
-const { getAtMeCount } = require('../../controller/blog-at')
+const { getAtMeCount, getAtMeBlogList } = require('../../controller/blog-at')
 const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -133,5 +133,34 @@ router.get('/square', loginRedirect, async (ctx, next) => {
         },
     })
 })
+
+router.get('/at-me', loginRedirect, async (ctx, next) => {
+    const { id: userId } = ctx.session.userInfo
+    // 获取@数量
+    const atCountRes = await getAtMeCount(userId)
+    const { count: atCount } = atCountRes.data
+    // 获取未读的第一页微博列表
+    const res = await getAtMeBlogList(userId)
+    const {
+        blogList,
+        isEmpty,
+        pageIndex,
+        pageSize,
+        count
+    } = res.data
+
+    await ctx.render('atMe', {
+        blogData: {
+            blogList,
+            isEmpty,
+            pageIndex,
+            pageSize,
+            count,
+        },
+        atCount
+    })
+    // 标记已读 
+})
+
 
 module.exports = router
