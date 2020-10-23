@@ -8,7 +8,7 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { getSquareBlogList } = require('../../controller/blog-square')
 const { getFans, getFollower } = require('../../controller/user-relation')
-const { getAtMeCount, getAtMeBlogList } = require('../../controller/blog-at')
+const { getAtMeCount, getAtMeBlogList, markAsRead } = require('../../controller/blog-at')
 const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -160,6 +160,9 @@ router.get('/at-me', loginRedirect, async (ctx, next) => {
         atCount
     })
     // 标记已读 
+    if (atCount > 0) {
+        markAsRead(userId)
+    }
 })
 
 

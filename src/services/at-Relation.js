@@ -3,7 +3,6 @@
  * @author Young
  */
 
-const user = require('../controller/user')
 const { AtRelation, Blog, User } = require('../db/model/index')
 const { formatUser, formatBlog } = require('./_format')
 
@@ -73,8 +72,34 @@ async function getAtUserBlogList (userId, pageIndex, pageSize) {
     }
 }
 
+
+/**
+ * 更新@relation内容
+ * @param {Object} param0 更新内容
+ * @param {Object} param1 查询条件
+ */
+async function upDateAtRelation (
+    { newIsRead }, // 要更新的内容
+    { userId, isRead } // 条件
+) {
+    const updateData = {}
+    newIsRead && (updateData.isRead = newIsRead)
+    const whereData = {}
+    userId && (whereData.userId = userId)
+    isRead && (whereData.isRead = isRead)
+
+    // 更新
+    const res = await AtRelation.update(updateData,
+        {
+            where: whereData
+        }
+    )
+    return res > 0
+}
+
 module.exports = {
     createAtRelation,
     getAtRelationCount,
-    getAtUserBlogList
+    getAtUserBlogList,
+    upDateAtRelation
 }

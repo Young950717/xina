@@ -3,7 +3,7 @@
  * @author Young
  */
 
-const { getAtRelationCount, getAtUserBlogList } = require('../services/at-Relation')
+const { getAtRelationCount, getAtUserBlogList, upDateAtRelation } = require('../services/at-Relation')
 const { SuccessModel } = require('../model/ResModel')
 const { PAGE_SIZE } = require('../config/constants')
 
@@ -34,7 +34,23 @@ async function getAtMeBlogList (userId, pageIndex = 0, pageSize = PAGE_SIZE) {
     })
 }
 
+/**
+ * 标记已读
+ * @param {Numner} userId 
+ */
+async function markAsRead (userId) {
+    try {
+        await upDateAtRelation(
+            { newIsRead: true },
+            { userId, isRead: false }
+        )
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 module.exports = {
     getAtMeCount,
-    getAtMeBlogList
+    getAtMeBlogList,
+    markAsRead
 }
