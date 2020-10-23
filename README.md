@@ -1,9 +1,13 @@
 # Sina
 仿造新浪微博的功能 用koa写的小项目
 
-启动redis redis-server
+技术栈：koa2 + mysql + redis
 
-redis-cli
+本地要先安装mysql，安装后cd到本目录，运行node src/db/sync.js 同步数据库
+
+启动redis 运行 redis-server
+
+下载依赖 npm install
 
 运行项目 npm run dev
 检测eslint npm run lint
