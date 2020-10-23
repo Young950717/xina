@@ -8,6 +8,7 @@ const { loginRedirect } = require('../../middlewares/loginChecks')
 const { getProfileBlogList } = require('../../controller/blog-profile')
 const { getSquareBlogList } = require('../../controller/blog-square')
 const { getFans, getFollower } = require('../../controller/user-relation')
+const { getAtMeCount } = require('../../controller/blog-at')
 const { getHomeBlogList } = require('../../controller/blog-home')
 const { isExist } = require('../../controller/user')
 router.get('/', loginRedirect, async (ctx, next) => {
@@ -24,6 +25,10 @@ router.get('/', loginRedirect, async (ctx, next) => {
     // 获取首页微博
     const blogRes = await getHomeBlogList(userId, 0)
     const { blogList, isEmpty, count, pageIndex, pageSize } = blogRes.data
+
+    // 获取@数量
+    const atCountRes = await getAtMeCount(userId)
+    const { count: atCount } = atCountRes.data
 
     await ctx.render('index', {
         blogData: {
@@ -42,7 +47,8 @@ router.get('/', loginRedirect, async (ctx, next) => {
             followersData: {
                 count: followerCount,
                 list: followerList
-            }
+            },
+            atCount
         },
     })
 })
@@ -81,11 +87,13 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     const followerRes = await getFollower(curUserInfo.id)
     const { count: followerCount, followerList } = followerRes.data
 
-
     // 是否关注了此人
     const amIFollowed = fansList.some(o => {
         return o.userName === myUserName
     })
+    // 获取@数量
+    const atCountRes = await getAtMeCount(curUserInfo.id)
+    const { count: atCount } = atCountRes.data
 
     await ctx.render('profile', {
         blogData: {
@@ -106,7 +114,8 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
                 count: followerCount,
                 list: followerList
             },
-            amIFollowed
+            amIFollowed,
+            atCount
         },
     })
 })

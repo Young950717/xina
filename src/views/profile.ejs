@@ -34,13 +34,12 @@
         <!-- 右侧 -->
         <div class="col-4">
             <!-- 个人信息 -->
-            <!--  // amIFollowed: userData.amIFollowed,
-                   // atCount: userData.atCount -->
             <div class="right-item">
                 <%- include('widgets/user-info', {
                     userInfo: userData.userInfo,
                     isMe: userData.isMe,
-                    amIFollowed: userData.amIFollowed
+                    amIFollowed: userData.amIFollowed,
+                    atCount: userData.atCount
                 });%>
             </div>
             <!-- 粉丝 -->
