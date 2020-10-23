@@ -30,8 +30,7 @@ async function getAtMeBlogList (userId, pageIndex = 0, pageSize = PAGE_SIZE) {
         isEmpty: blogList.length === 0,
         count,
         pageIndex,
-        pageSize: PAGE_SIZE,
-        count
+        pageSize: PAGE_SIZE
     })
 }
 
